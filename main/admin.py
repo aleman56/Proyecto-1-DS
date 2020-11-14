@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Localizacion, Producto, Categoria, Proveedor, Cliente, Colaborador, Profile
+from .models import Localizacion, Producto, Categoria, Proveedor, Cliente, Colaborador, Profile, Pedido, DetallePedido, ProductoImage
+
 
 
 class ClienteInline(admin.TabularInline):
@@ -16,6 +17,15 @@ class ProfileAdmin(admin.ModelAdmin):
         ColaboradorInline
     ]
 
+class ProductoImageInline(admin.TabularInline):
+    model=ProductoImage
+
+
+class ProductoAdmin(admin.ModelAdmin):
+    inlines = [
+        ProductoImageInline,
+    ]
+
 # Register your models here.
 ...
 admin.site.register(Cliente)
@@ -24,7 +34,7 @@ admin.site.register(Profile, ProfileAdmin)
 
 # Register your models here.
 admin.site.register(Localizacion)
-admin.site.register(Producto)
+admin.site.register(Producto, ProductoAdmin)
 admin.site.register(Categoria)
 admin.site.register(Proveedor)
 
